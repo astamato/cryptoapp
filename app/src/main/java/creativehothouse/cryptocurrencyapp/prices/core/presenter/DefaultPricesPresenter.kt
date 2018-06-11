@@ -2,6 +2,7 @@ package creativehothouse.cryptocurrencyapp.prices.core.presenter
 
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import creativehothouse.cryptocurrencyapp.app.model.ResponseModel
 import creativehothouse.cryptocurrencyapp.prices.core.interactor.PricesInteractor
 import creativehothouse.cryptocurrencyapp.prices.core.view.PricesView
@@ -11,7 +12,8 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
 class DefaultPricesPresenter(val view: PricesView,
-    val interactor: PricesInteractor) : PricesPresenter {
+    val interactor: PricesInteractor,
+    val wireframe: PricesWireframe) : PricesPresenter {
 
   private var disposables = CompositeDisposable()
 
@@ -30,13 +32,24 @@ class DefaultPricesPresenter(val view: PricesView,
         )
   }
 
+  private fun observeTicketIsSelected(): Disposable {
+    return view.onCoinIsSelected()
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(
+            { coin -> wireframe.onCoinSelected(coin) },
+            { throwable -> onGetCryptoCurrenciesListFail(throwable) }
+        )
+  }
+
 
   override fun getView(): View = view.getView()
 
 
-  override fun onGetCryptoCurrenciesListSuccess(coins: ResponseModel) {
+  override fun onGetCryptoCurrenciesListSuccess(responseModel: ResponseModel) {
     view.hideLoading()
-    view.drawCoinsList(coins)
+    view.drawCoinsList(responseModel)
+    disposables.add(observeTicketIsSelected())
   }
 
   override fun onGetCryptoCurrenciesListFail(it: Throwable?) {
@@ -46,10 +59,17 @@ class DefaultPricesPresenter(val view: PricesView,
   }
 
 
-  override fun onCryptoCurrencyIsSelected() {
+  override fun onCryptoCurrencyIsSelected(): Disposable {
+    return view.onCoinIsSelected()
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe {
+          Toast.makeText(view.getView().context, "Clicked on $it", Toast.LENGTH_SHORT).show()
+        }
   }
 
   override fun destroy() {
+    disposables.clear()
   }
 
 }

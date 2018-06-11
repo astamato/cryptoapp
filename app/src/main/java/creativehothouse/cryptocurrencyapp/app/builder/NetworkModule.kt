@@ -20,8 +20,6 @@ class NetworkModule(private var context: Context) {
     const val DISK_CACHE_SIZE = 50 * 1024 * 1024 // 50MB
 
     const val CRYPTO_CURRENCIES_SERVICE_BASE_URL = "https://test.cryptojet.io"
-    const val CRYPTO_CURRENCIES_SERVICE_LOGIN_EMAIL = "richard@rich.com"
-    const val CRYPTO_CURRENCIES_SERVICE_LOGIN_PSSWD = "secret"
   }
 
   @Provides
@@ -34,7 +32,6 @@ class NetworkModule(private var context: Context) {
         TimeUnit.SECONDS)
         .readTimeout(CONNECTION_TIMEOUT_SECONDS.toLong(), TimeUnit.SECONDS)
         .writeTimeout(CONNECTION_TIMEOUT_SECONDS.toLong(), TimeUnit.SECONDS)
-        // .addInterceptor(BasicAuthInterceptor(CRYPTO_CURRENCIES_SERVICE_LOGIN_EMAIL, CRYPTO_CURRENCIES_SERVICE_LOGIN_PSSWD))
         .cache(cache)
     return okHttpClient.build()
   }

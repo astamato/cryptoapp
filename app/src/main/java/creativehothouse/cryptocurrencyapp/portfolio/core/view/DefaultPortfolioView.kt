@@ -1,6 +1,7 @@
-package creativehothouse.cryptocurrencyapp.prices.core.view
+package creativehothouse.cryptocurrencyapp.portfolio.core.view
 
 import android.content.Context
+import android.support.design.widget.CoordinatorLayout
 import android.support.design.widget.Snackbar
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
@@ -10,25 +11,18 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.ProgressBar
 import creativehothouse.cryptocurrencyapp.R
+import creativehothouse.cryptocurrencyapp.R.layout
 import creativehothouse.cryptocurrencyapp.app.model.Coin
-import creativehothouse.cryptocurrencyapp.app.model.ResponseModel
 import creativehothouse.cryptocurrencyapp.prices.core.view.adapter.CoinsPricesAdapter
-import io.reactivex.Observable
 
-
-class DefaultPricesView(context: Context) : LinearLayout(context), PricesView {
-
+class DefaultPortfolioView(context: Context) : CoordinatorLayout(context), PortfolioView {
   private lateinit var adapter: CoinsPricesAdapter
 
   private var progressBar: ProgressBar
 
   init {
-    inflate(context, R.layout.fragment_prices_list, this)
+    LinearLayout.inflate(context, layout.fragment_portfolio, this)
     progressBar = findViewById(R.id.progressBar)
-  }
-
-  override fun getView(): View {
-    return this
   }
 
   override fun hideLoading() {
@@ -39,15 +33,12 @@ class DefaultPricesView(context: Context) : LinearLayout(context), PricesView {
     progressBar.visibility = View.VISIBLE
   }
 
-  override fun drawCoinsList(responseModel: ResponseModel) {
-    val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
+  override fun drawPortfolio(coins: List<Coin>) {
+    val recyclerView = findViewById<RecyclerView>(R.id.recyclerViewPortfolio)
     recyclerView.layoutManager = LinearLayoutManager(context)
-    adapter = CoinsPricesAdapter(responseModel.coins.data)
+    recyclerView.itemAnimator = DefaultItemAnimator()
+    adapter = CoinsPricesAdapter(coins)
     recyclerView.adapter = adapter
-  }
-
-  override fun onCoinIsSelected(): Observable<Coin> {
-    return adapter.clickCoinEvent
   }
 
   override fun showErrorLoadingCoinList() {
@@ -57,4 +48,7 @@ class DefaultPricesView(context: Context) : LinearLayout(context), PricesView {
         .show()
   }
 
+  override fun getView(): View {
+    return this
+  }
 }

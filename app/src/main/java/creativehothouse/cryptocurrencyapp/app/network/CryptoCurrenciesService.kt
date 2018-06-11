@@ -3,7 +3,9 @@ package creativehothouse.cryptocurrencyapp.app.network
 import creativehothouse.cryptocurrencyapp.app.model.Coin
 import creativehothouse.cryptocurrencyapp.app.model.ResponseModel
 import creativehothouse.cryptocurrencyapp.app.model.Trade
+import creativehothouse.cryptocurrencyapp.portfolio.model.PortfolioResponseModel
 import io.reactivex.Observable
+import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
@@ -22,9 +24,9 @@ interface CryptoCurrenciesService {
   fun getCryptoCurrencyInfoById(@Path("coin_id") page: Int): Observable<Coin>
 
   @GET("/portfolio")
-  fun getPortfolio(@Header("Authorization") authHeader: String): Observable<Trade>
+  fun getPortfolio(@Header("Authorization") authHeader: String): Observable<PortfolioResponseModel>
 
   @POST("/portfolio")
-  fun storeNewTradeInPortfolio(@Header("Authorization") authHeader: String): Observable<Trade>
+  fun storeNewTradeInPortfolio(@Header("Authorization") authHeader: String, @Body coin: Coin): Observable<Trade>
 
 }

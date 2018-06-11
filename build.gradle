@@ -1,31 +1,34 @@
 buildscript {
-    ext.supportLib = '27.1.1'
-    ext.kotlinVersion = '1.2.41'
-    ext.rxAndroidVersion = '2.0.2'
-    ext.retrofitVersion = '2.4.0'
-    ext.daggerVersion = '2.13'
-    ext.okHttpVersion = '3.9.0'
-    ext.junitVersion = '4.12'
-    ext.mockitoVersion = '2.18.3'
-    ext.rxBindingVersion = '2.1.1'
+  ext.supportLib = '27.1.1'
+  ext.kotlinVersion = '1.2.41'
+  ext.rxAndroidVersion = '2.0.2'
+  ext.retrofitVersion = '2.4.0'
+  ext.daggerVersion = '2.13'
+  ext.okHttpVersion = '3.9.0'
+  ext.junitVersion = '4.12'
+  ext.mockitoVersion = '2.18.3'
+  ext.rxBindingVersion = '2.1.1'
+  ext.gradleVersion = '3.1.2'
+  ext.realmVersion = '5.2.0'
 
-    repositories {
-        google()
-        jcenter()
-    }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:3.1.3'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
-    }
+  repositories {
+    google()
+    jcenter()
+  }
+  dependencies {
+    classpath "com.android.tools.build:gradle:$gradleVersion"
+    classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+    classpath "io.realm:realm-gradle-plugin:$realmVersion"
+  }
 }
 
 allprojects {
-    repositories {
-        google()
-        jcenter()
-    }
+  repositories {
+    google()
+    jcenter()
+  }
 }
 
 task clean(type: Delete) {
-    delete rootProject.buildDir
+  delete rootProject.buildDir
 }
