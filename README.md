@@ -26,3 +26,7 @@ Still TODO:
 * Better UI design
 * Unit testing
 * Integration tests. Automation test.
+
+Observations
+* Coin object price_usd different type than portfolio trade price_usd
+* Pagination of list of coins

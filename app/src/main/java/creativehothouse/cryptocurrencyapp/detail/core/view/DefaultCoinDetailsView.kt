@@ -11,16 +11,18 @@ import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
 import com.github.mikephil.charting.charts.LineChart
-import com.github.mikephil.charting.components.Description
-import com.github.mikephil.charting.data.Entry
-import com.github.mikephil.charting.data.LineData
-import com.github.mikephil.charting.data.LineDataSet
 import com.jakewharton.rxbinding2.view.clicks
+import com.jjoe64.graphview.DefaultLabelFormatter
+import com.jjoe64.graphview.GraphView
+import com.jjoe64.graphview.series.DataPoint
+import com.jjoe64.graphview.series.LineGraphSeries
 import creativehothouse.cryptocurrencyapp.R
 import creativehothouse.cryptocurrencyapp.app.model.Coin
 import creativehothouse.cryptocurrencyapp.app.model.Trade
 import creativehothouse.cryptocurrencyapp.detail.model.Historical
 import io.reactivex.Observable
+import java.text.SimpleDateFormat
+import java.util.Date
 
 
 class DefaultCoinDetailsView(context: Context?) : CoinDetailsView, LinearLayout(context) {
@@ -65,23 +67,36 @@ class DefaultCoinDetailsView(context: Context?) : CoinDetailsView, LinearLayout(
 
     showCoinDetails(coin)
 
-    val entries = ArrayList<Entry>()
 
-    // for (data in historical) {
-    entries.add(Entry(1f, 4f))
-    entries.add(Entry(2f, 3f))
-    entries.add(Entry(3f, 6f))
-    //}
+    //------------------------------------------------------------------------------------------------
 
-    val dataSet = LineDataSet(entries, coin.name)
-    val lineData = LineData(dataSet)
-    chart.data = lineData
+    var sdf = SimpleDateFormat("yyyy-MM-dd")
+    val graph = findViewById<View>(R.id.graph) as GraphView
+    val list = ArrayList<DataPoint>()
+    for (hist in historical) {
+      list.add(DataPoint(hist.snapshot, hist.priceUSD.toDouble()))
+    }
+    val series = LineGraphSeries<DataPoint>(list.toTypedArray())
 
-    val description = Description()
-    description.text = "Historical evolution of cryptocoin"
+    graph.gridLabelRenderer.labelFormatter = object : DefaultLabelFormatter() {
+      override fun formatLabel(value: Double, isValueX: Boolean): String {
+        if (isValueX) {
 
-    chart.description = description
-    chart.invalidate()
+          return sdf.format(Date(value.toLong()))
+        }
+        return super.formatLabel(value, isValueX)
+
+      }
+    }
+
+    //graph.viewport.isScalable = true
+   // graph.viewport.setScalableY(true)
+
+   // graph.gridLabelRenderer.setHumanRounding(false)
+    graph.gridLabelRenderer.numHorizontalLabels = 3
+
+    graph.addSeries(series)
+
 
   }
 

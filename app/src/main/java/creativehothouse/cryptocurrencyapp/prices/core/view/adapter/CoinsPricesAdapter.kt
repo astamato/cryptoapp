@@ -39,7 +39,6 @@ class CoinsPricesAdapter(private val coins: List<Coin>) : RecyclerView.Adapter<C
     return R.layout.prices_coin_item
   }
 
-
   inner class CoinModelViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
 
     init {

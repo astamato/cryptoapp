@@ -79,7 +79,7 @@ class DefaultCoinDetailsPresenter(val view: CoinDetailsView,
   }
 
   override fun onAddToPortfolioSuccess(result: Trade) {
-    //FIXME store realm data
+    //FIXME store realm data!!!
     view.displaySuccessAddToPortfolioDialog(coinDetails, result)
   }
 
