@@ -3,6 +3,7 @@ package creativehothouse.cryptocurrencyapp.detail.core.view
 import android.view.View
 import creativehothouse.cryptocurrencyapp.app.model.Coin
 import creativehothouse.cryptocurrencyapp.detail.model.Historical
+import io.reactivex.Observable
 
 interface CoinDetailsView {
 
@@ -11,8 +12,9 @@ interface CoinDetailsView {
   fun showLoading()
   fun hideLoading()
 
-  fun showErrorLoadingCoinList()
-  fun showCoinDetails(result: Coin)
-  fun showCoinHistorical(historical: List<Historical>)
+  fun observeToolbarClick(): Observable<Unit>
+  fun showErrorLoadingCoinHistorical()
+
+  fun showCoinHistorical(coin: Coin, historical: List<Historical>)
 
 }

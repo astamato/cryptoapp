@@ -10,4 +10,16 @@
   <string name="onErrorLoad">Error loading data</string>
 
   <string name="trades_viewholder_symbol_format">(%1$s)</string>
+
+  <string name="price_label">Price:</string>
+  <string name="coin_details_screen">Coin Details</string>
+
+  <string name="market_cap_usd">Market Cap USD:</string>
+  <string name="available_supply">Available Supply:</string>
+  <string name="total_supply">Total Supply:</string>
+  <string name="variation_1hs_label">Variation (1hs):</string>
+  <string name="variation_label">Variation (24hs):</string>
+  <string name="variation_7d_label">Variation (7d):</string>
+
+
 </resources>

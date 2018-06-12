@@ -18,10 +18,11 @@ fulfill all its dependencies and does not rely on a core module with shared code
 
 Still TODO:
 
+* Prices view list, infinite scrolling
 * Historical graph for coins history and evolution
-* Persistance with Realm for portfolio screen
+* Persistence with Realm for portfolio screen
 * Adding add cryptocurrencies to portfolio from details view
 * Fulfill name and symbol from bitcoins from persisted data
 * Better UI design
 * Unit testing
-* Integration tests. Automation test
+* Integration tests. Automation test.

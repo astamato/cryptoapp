@@ -1,6 +1,5 @@
 package creativehothouse.cryptocurrencyapp.detail.interactor
 
-import creativehothouse.cryptocurrencyapp.app.model.Coin
 import creativehothouse.cryptocurrencyapp.app.model.CoinResponse
 import creativehothouse.cryptocurrencyapp.detail.model.HistoricalReponseModel
 import io.reactivex.Observable

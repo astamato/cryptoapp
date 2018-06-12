@@ -1,10 +1,12 @@
 package creativehothouse.cryptocurrencyapp.detail
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.Toolbar
+import creativehothouse.cryptocurrencyapp.R
 import creativehothouse.cryptocurrencyapp.app.builder.NetworkModule
 import creativehothouse.cryptocurrencyapp.detail.builder.CoinDetailsModule
 import creativehothouse.cryptocurrencyapp.detail.builder.DaggerCoinDetailsComponent
@@ -27,6 +29,7 @@ class CoinDetailsActivity : AppCompatActivity() {
     }
   }
 
+  @SuppressLint("RestrictedApi")
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
 
@@ -34,9 +37,21 @@ class CoinDetailsActivity : AppCompatActivity() {
         .coinDetailsModule(CoinDetailsModule(this)).build()
         .inject(this)
 
+    setContentView(presenter.getView())
+    val toolbar = findViewById<Toolbar>(R.id.appToolbar)
+    setSupportActionBar(toolbar)
+    supportActionBar!!.setDefaultDisplayHomeAsUpEnabled(true)
+    supportActionBar!!.setDisplayShowHomeEnabled(true)
+    toolbar.setNavigationOnClickListener { onBackPressed() }
+
     presenter.create(intent.getIntExtra(SELECTED_COIN, 0))
 
-    setContentView(presenter.getView())
+  }
+
+
+  override fun onSupportNavigateUp(): Boolean {
+    onBackPressed()
+    return true
   }
 
 }
