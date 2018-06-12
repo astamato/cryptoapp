@@ -17,9 +17,13 @@
   <string name="market_cap_usd">Market Cap USD:</string>
   <string name="available_supply">Available Supply:</string>
   <string name="total_supply">Total Supply:</string>
-  <string name="variation_1hs_label">Variation (1hs):</string>
-  <string name="variation_label">Variation (24hs):</string>
-  <string name="variation_7d_label">Variation (7d):</string>
+  <string name="percent_change_1h">Variation (1hs):</string>
+  <string name="percent_change_24h">Variation (24hs):</string>
+  <string name="percent_change_7d">Variation (7d):</string>
+  <string name="add_to_portfolio">Add to Portfolio</string>
+  <string name="add_to_portfolio_dialog_message">Your trade has been recorded successfully for coin: %1$s (%2$s). The
+    amount is %3$s </string>
+  <string name="add_to_portfolio_dialog_title">New Trade!</string>
 
 
 </resources>

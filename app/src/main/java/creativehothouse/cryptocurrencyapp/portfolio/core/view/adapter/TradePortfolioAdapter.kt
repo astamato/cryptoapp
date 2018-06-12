@@ -20,8 +20,8 @@ class TradePortfolioAdapter(private val trades: List<Trade>) : RecyclerView.Adap
     // FIXME get name and symbol
     // holder.name.text = trades[position].name
     // holder.symbol.text = trades[position].symbol
-    holder.amount.text = trades[position].amount
-    holder.price.text = trades[position].priceUSD
+    holder.amount.text = "%.2f".format(trades[position].amount)
+    holder.price.text = "%.2f".format(trades[position].priceUSD)
   }
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TradeModelViewHolder {

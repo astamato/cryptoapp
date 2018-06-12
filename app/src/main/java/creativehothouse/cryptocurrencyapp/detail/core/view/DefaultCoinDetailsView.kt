@@ -2,11 +2,14 @@ package creativehothouse.cryptocurrencyapp.detail.core.view
 
 import android.content.Context
 import android.support.design.widget.Snackbar
+import android.support.v7.app.AlertDialog
 import android.support.v7.widget.Toolbar
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.ProgressBar
+import android.widget.TextView
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.Description
 import com.github.mikephil.charting.data.Entry
@@ -15,6 +18,7 @@ import com.github.mikephil.charting.data.LineDataSet
 import com.jakewharton.rxbinding2.view.clicks
 import creativehothouse.cryptocurrencyapp.R
 import creativehothouse.cryptocurrencyapp.app.model.Coin
+import creativehothouse.cryptocurrencyapp.app.model.Trade
 import creativehothouse.cryptocurrencyapp.detail.model.Historical
 import io.reactivex.Observable
 
@@ -24,6 +28,7 @@ class DefaultCoinDetailsView(context: Context?) : CoinDetailsView, LinearLayout(
   private var progressBar: ProgressBar
   private var chart: LineChart
   private var toolbar: Toolbar
+  private var addToPortfolioButton: Button
 
   init {
     inflate(context, R.layout.coin_details_view, this)
@@ -31,6 +36,7 @@ class DefaultCoinDetailsView(context: Context?) : CoinDetailsView, LinearLayout(
     toolbar.title = context?.getString(R.string.coin_details_screen)
     progressBar = findViewById(R.id.progressBar)
     chart = findViewById(R.id.chart)
+    addToPortfolioButton = findViewById(R.id.addToPortfolio)
 
   }
 
@@ -80,11 +86,34 @@ class DefaultCoinDetailsView(context: Context?) : CoinDetailsView, LinearLayout(
   }
 
   private fun showCoinDetails(coin: Coin) {
+    val name = findViewById<TextView>(R.id.name)
+    name.text = coin.name
+    val symbol = findViewById<TextView>(R.id.symbol)
+    symbol.text = coin.symbol
+    val currentPrice = findViewById<TextView>(R.id.currentPrice)
+    currentPrice.text = coin.priceUSD
+    val variation = findViewById<TextView>(R.id.variation)
+    variation.text = coin.percentChange24h
+
     toolbar.title = coin.name
   }
 
-  override fun observeToolbarClick(): Observable<Unit> {
-    return toolbar.clicks()
+  override fun displaySuccessAddToPortfolioDialog(coin: Coin, trade: Trade) {
+    val alertDialog = AlertDialog.Builder(context).create()
+    alertDialog.setTitle(context.getString(R.string.add_to_portfolio_dialog_title))
+    alertDialog.setMessage(
+        context.getString(R.string.add_to_portfolio_dialog_message, coin.name, coin.symbol, "%.2f".format(trade.amount)))
+    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+        { dialog, _ -> dialog.dismiss() })
+    alertDialog.show()
+  }
+
+  override fun enableAddToPortfolioButton() {
+    addToPortfolioButton.isEnabled = true
+  }
+
+  override fun observeAddToPortfolioClicks(): Observable<Unit> {
+    return addToPortfolioButton.clicks()
   }
 
 }

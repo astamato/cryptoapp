@@ -32,6 +32,6 @@ interface CryptoCurrenciesService {
   fun getPortfolio(@Header("Authorization") authHeader: String): Observable<PortfolioResponseModel>
 
   @POST("/portfolio")
-  fun storeNewTradeInPortfolio(@Header("Authorization") authHeader: String, @Body coin: Coin): Observable<Trade>
+  fun storeNewTradeInPortfolio(@Header("Authorization") authHeader: String, @Body trade: Trade): Observable<Trade>
 
 }

@@ -1,6 +1,7 @@
 package creativehothouse.cryptocurrencyapp.detail.core.presenter
 
 import android.view.View
+import creativehothouse.cryptocurrencyapp.app.model.Trade
 
 interface CoinDetailsPresenter {
 
@@ -8,6 +9,6 @@ interface CoinDetailsPresenter {
   fun destroy()
   fun getView(): View
   fun onLoadCoinHistoricalSuccess()
-  fun onLoadCoinDetailsFail(it: Throwable?)
-
+  fun onLoadFailed(it: Throwable?)
+  fun onAddToPortfolioSuccess(result: Trade)
 }
