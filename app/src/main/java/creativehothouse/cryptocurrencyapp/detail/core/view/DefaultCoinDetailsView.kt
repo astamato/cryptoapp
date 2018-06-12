@@ -68,39 +68,25 @@ class DefaultCoinDetailsView(context: Context?) : CoinDetailsView, CoordinatorLa
 
 
   override fun showCoinHistorical(coin: Coin, historical: List<Historical>) {
-
+    activateView()
     showCoinDetails(coin)
 
-    drawStrategyChart1(historical)
+    drawChartStrategy1(historical)
 
-    drawStrategyChart2(historical, coin)
+    drawChartStrategy2(historical, coin)
 
   }
 
-  private fun drawStrategyChart2(historical: List<Historical>,
-      coin: Coin) {
-    val entries = ArrayList<Entry>()
-    val referenceTimestamp = historical[0].snapshot.time
-
-    var xAxisFormatter = DateAxisValueFormatter(referenceTimestamp)
-    var xAxis = chart.xAxis
-    xAxis.valueFormatter = xAxisFormatter
-
-    for (data in historical) {
-      entries.add(Entry((data.snapshot.time - referenceTimestamp).toFloat(), data.priceUSD.toFloat()))
-    }
-
-    val dataSet = LineDataSet(entries, coin.name)
-    val lineData = LineData(dataSet)
-    chart.data = lineData
-
-    val description = Description()
-    description.text = "Historical evolution of Cryptocoin"
-    chart.description = description
-    chart.invalidate()
+  /**
+   * Will make the view visible once the loading of the data is completed
+   */
+  private fun activateView() {
+    var scrollView = findViewById<View>(R.id.scrollView)
+    scrollView.visibility = View.VISIBLE
   }
 
-  private fun drawStrategyChart1(historical: List<Historical>) {
+
+  private fun drawChartStrategy1(historical: List<Historical>) {
     val sdf = SimpleDateFormat("yyyy-MM-dd")
     val graph = findViewById<View>(R.id.graph) as GraphView
     val list = ArrayList<DataPoint>()
@@ -123,6 +109,29 @@ class DefaultCoinDetailsView(context: Context?) : CoinDetailsView, CoordinatorLa
     graph.viewport.isXAxisBoundsManual = true
     graph.gridLabelRenderer.numHorizontalLabels = 3
     graph.addSeries(series)
+  }
+
+  private fun drawChartStrategy2(historical: List<Historical>,
+      coin: Coin) {
+    val entries = ArrayList<Entry>()
+    val referenceTimestamp = historical[0].snapshot.time
+
+    var xAxisFormatter = DateAxisValueFormatter(referenceTimestamp)
+    var xAxis = chart.xAxis
+    xAxis.valueFormatter = xAxisFormatter
+
+    for (data in historical) {
+      entries.add(Entry((data.snapshot.time - referenceTimestamp).toFloat(), data.priceUSD.toFloat()))
+    }
+
+    val dataSet = LineDataSet(entries, coin.name)
+    val lineData = LineData(dataSet)
+    chart.data = lineData
+
+    val description = Description()
+    description.text = "Historical evolution of Cryptocoin"
+    chart.description = description
+    chart.invalidate()
   }
 
   private fun showCoinDetails(coin: Coin) {

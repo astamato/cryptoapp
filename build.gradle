@@ -9,8 +9,9 @@ buildscript {
   ext.mockitoVersion = '2.18.3'
   ext.rxBindingVersion = '2.1.1'
   ext.gradleVersion = '3.1.2'
-  ext.realmVersion = '5.2.0'
+  ext.realmVersion = '5.3.0'
   ext.chartLib = 'v3.0.3'
+  ext.graphViewLib = '4.2.2'
 
   repositories {
     google()

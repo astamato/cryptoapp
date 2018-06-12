@@ -14,6 +14,7 @@ import creativehothouse.cryptocurrencyapp.portfolio.wireframe.PortfolioWireframe
 
 import dagger.Module
 import dagger.Provides
+import io.realm.Realm
 
 
 @Module
@@ -22,8 +23,8 @@ class PortfolioModule(private val context: Context) {
   @Provides
   @ApplicationScope
   fun providePortfolioPresenter(view: PortfolioView, interactor: PortfolioInteractor,
-      wireframe: PortfolioWireframe): PortfolioPresenter {
-    return DefaultPortfolioPresenter(view, interactor, wireframe)
+      wireframe: PortfolioWireframe, realm: Realm): PortfolioPresenter {
+    return DefaultPortfolioPresenter(view, interactor, wireframe, realm)
   }
 
   @Provides

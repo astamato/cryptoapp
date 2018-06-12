@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
-
+apply plugin: 'realm-android'
 
 android {
   compileSdkVersion 27
@@ -13,6 +13,10 @@ android {
     versionName "1.0"
     testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
   }
+  realm {
+    syncEnabled = true;
+  }
+
   buildTypes {
     release {
       minifyEnabled false
@@ -43,7 +47,7 @@ dependencies {
   implementation "com.squareup.okhttp3:okhttp:$okHttpVersion"
 
   implementation "com.github.PhilJay:MPAndroidChart:$chartLib"
-  implementation 'com.jjoe64:graphview:4.2.2'
+  implementation "com.jjoe64:graphview:$graphViewLib"
 
   implementation "com.google.dagger:dagger:$daggerVersion"
   implementation 'com.android.support:design:27.1.1'

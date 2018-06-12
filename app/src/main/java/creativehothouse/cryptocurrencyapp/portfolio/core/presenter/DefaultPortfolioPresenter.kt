@@ -9,11 +9,11 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
+import io.realm.Realm
 
 class DefaultPortfolioPresenter(val view: PortfolioView,
     val interactor: PortfolioInteractor,
-    val wireframe: PortfolioWireframe) : PortfolioPresenter {
-
+    val wireframe: PortfolioWireframe, val realm: Realm) : PortfolioPresenter {
 
   private var disposables = CompositeDisposable()
 
@@ -27,10 +27,14 @@ class DefaultPortfolioPresenter(val view: PortfolioView,
   override fun onGetPortfolioSuccess(result: PortfolioResponseModel) {
     view.hideLoading()
     view.drawPortfolio(result.coins)
+    interactor.storeCoinsInDB(realm, result.coins)
   }
 
   override fun onGetPortfolioFail(it: Throwable?) {
     view.hideLoading()
+
+    //FIXME REALM LOAD FROM DATABASE!!!
+
     view.showErrorLoadingCoinList()
   }
 
@@ -46,6 +50,7 @@ class DefaultPortfolioPresenter(val view: PortfolioView,
   }
 
   override fun destroy() {
+    realm.close()
     disposables.clear()
   }
 
