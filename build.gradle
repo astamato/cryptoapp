@@ -10,6 +10,7 @@ buildscript {
   ext.rxBindingVersion = '2.1.1'
   ext.gradleVersion = '3.1.2'
   ext.realmVersion = '5.2.0'
+  ext.chartLib = 'v3.0.3'
 
   repositories {
     google()
@@ -26,6 +27,7 @@ allprojects {
   repositories {
     google()
     jcenter()
+    maven { url 'https://jitpack.io' }
   }
 }
 

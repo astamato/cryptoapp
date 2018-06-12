@@ -3,7 +3,7 @@ package creativehothouse.cryptocurrencyapp.prices.core.presenter
 import android.util.Log
 import android.view.View
 import android.widget.Toast
-import creativehothouse.cryptocurrencyapp.app.model.ResponseModel
+import creativehothouse.cryptocurrencyapp.app.model.PricesListResponseModel
 import creativehothouse.cryptocurrencyapp.prices.core.interactor.PricesInteractor
 import creativehothouse.cryptocurrencyapp.prices.core.view.PricesView
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -46,7 +46,7 @@ class DefaultPricesPresenter(val view: PricesView,
   override fun getView(): View = view.getView()
 
 
-  override fun onGetCryptoCurrenciesListSuccess(responseModel: ResponseModel) {
+  override fun onGetCryptoCurrenciesListSuccess(responseModel: PricesListResponseModel) {
     view.hideLoading()
     view.drawCoinsList(responseModel)
     disposables.add(observeTicketIsSelected())

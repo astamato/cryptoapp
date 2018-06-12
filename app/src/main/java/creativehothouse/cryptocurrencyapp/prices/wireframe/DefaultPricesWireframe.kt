@@ -7,7 +7,7 @@ import creativehothouse.cryptocurrencyapp.detail.CoinDetailsActivity
 class DefaultPricesWireframe(private val context: Context) : PricesWireframe {
 
   override fun onCoinSelected(result: Coin) {
-    CoinDetailsActivity.init(context, 5)
+    CoinDetailsActivity.init(context, result.id)
   }
 
 }

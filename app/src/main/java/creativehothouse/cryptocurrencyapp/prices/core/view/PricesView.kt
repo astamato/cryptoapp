@@ -2,7 +2,7 @@ package creativehothouse.cryptocurrencyapp.prices.core.view
 
 import android.view.View
 import creativehothouse.cryptocurrencyapp.app.model.Coin
-import creativehothouse.cryptocurrencyapp.app.model.ResponseModel
+import creativehothouse.cryptocurrencyapp.app.model.PricesListResponseModel
 import io.reactivex.Observable
 
 interface PricesView {
@@ -11,7 +11,7 @@ interface PricesView {
   fun showLoading()
   fun hideLoading()
 
-  fun drawCoinsList(responseModel: ResponseModel)
+  fun drawCoinsList(responseModel: PricesListResponseModel)
   fun onCoinIsSelected(): Observable<Coin>
 
   fun showErrorLoadingCoinList()

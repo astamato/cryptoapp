@@ -2,7 +2,6 @@ package creativehothouse.cryptocurrencyapp.prices.core.view
 
 import android.content.Context
 import android.support.design.widget.Snackbar
-import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
@@ -11,7 +10,7 @@ import android.widget.LinearLayout
 import android.widget.ProgressBar
 import creativehothouse.cryptocurrencyapp.R
 import creativehothouse.cryptocurrencyapp.app.model.Coin
-import creativehothouse.cryptocurrencyapp.app.model.ResponseModel
+import creativehothouse.cryptocurrencyapp.app.model.PricesListResponseModel
 import creativehothouse.cryptocurrencyapp.prices.core.view.adapter.CoinsPricesAdapter
 import io.reactivex.Observable
 
@@ -39,7 +38,7 @@ class DefaultPricesView(context: Context) : LinearLayout(context), PricesView {
     progressBar.visibility = View.VISIBLE
   }
 
-  override fun drawCoinsList(responseModel: ResponseModel) {
+  override fun drawCoinsList(responseModel: PricesListResponseModel) {
     val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
     recyclerView.layoutManager = LinearLayoutManager(context)
     adapter = CoinsPricesAdapter(responseModel.coins.data)

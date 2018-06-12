@@ -2,7 +2,7 @@ package creativehothouse.cryptocurrencyapp.app.model
 
 import com.google.gson.annotations.SerializedName
 
-data class ResponseModel(val coins: Coins,
+data class PricesListResponseModel(val coins: Coins,
     @SerializedName("current_page") val currentPage: Int,
     @SerializedName("last_page") val lastPage: Int,
     @SerializedName("next_page_url") val nextPage: String) {

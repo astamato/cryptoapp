@@ -26,13 +26,13 @@ class PricesModule(private val context: Context) {
 
   @Provides
   @ApplicationScope
-  fun provideTicketsDisplayView(): PricesView {
+  fun providePricesView(): PricesView {
     return DefaultPricesView(context)
   }
 
   @Provides
   @ApplicationScope
-  fun provideTicketsDisplayInteractor(service: CryptoCurrenciesService): PricesInteractor {
+  fun providePricesInteractor(service: CryptoCurrenciesService): PricesInteractor {
     return DefaultPricesInteractor(service)
   }
 

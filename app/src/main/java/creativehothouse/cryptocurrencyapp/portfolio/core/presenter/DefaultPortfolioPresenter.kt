@@ -26,7 +26,6 @@ class DefaultPortfolioPresenter(val view: PortfolioView,
 
   override fun onGetPortfolioSuccess(result: PortfolioResponseModel) {
     view.hideLoading()
-    //FIXME !!!
     view.drawPortfolio(result.coins)
   }
 

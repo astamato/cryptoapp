@@ -1,6 +1,8 @@
 package creativehothouse.cryptocurrencyapp.app.builder
 
 import android.content.Context
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import creativehothouse.cryptocurrencyapp.app.network.CryptoCurrenciesService
 import dagger.Module
 import dagger.Provides
@@ -12,6 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.io.File
 import java.util.concurrent.TimeUnit
 
+
 @Module
 class NetworkModule(private var context: Context) {
   companion object {
@@ -20,6 +23,8 @@ class NetworkModule(private var context: Context) {
     const val DISK_CACHE_SIZE = 50 * 1024 * 1024 // 50MB
 
     const val CRYPTO_CURRENCIES_SERVICE_BASE_URL = "https://test.cryptojet.io"
+
+    const val DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
   }
 
   @Provides
@@ -38,12 +43,19 @@ class NetworkModule(private var context: Context) {
 
   @Provides
   @ApplicationScope
-  internal fun provideRetrofit(okhttp: OkHttpClient): Retrofit {
+  internal fun provideGson(): Gson = GsonBuilder()
+      .setDateFormat(DATE_FORMAT)
+      .create()
+
+
+  @Provides
+  @ApplicationScope
+  internal fun provideRetrofit(okhttp: OkHttpClient, gson: Gson): Retrofit {
     return Retrofit.Builder()
         .addCallAdapterFactory(
             RxJava2CallAdapterFactory.create())
         .addConverterFactory(
-            GsonConverterFactory.create()).client(okhttp)
+            GsonConverterFactory.create(gson)).client(okhttp)
         .baseUrl(CRYPTO_CURRENCIES_SERVICE_BASE_URL)
         .build()
   }

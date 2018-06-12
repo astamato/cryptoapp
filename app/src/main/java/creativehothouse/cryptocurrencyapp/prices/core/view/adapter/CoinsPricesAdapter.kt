@@ -20,7 +20,12 @@ class CoinsPricesAdapter(private val coins: List<Coin>) : RecyclerView.Adapter<C
   }
 
   override fun onBindViewHolder(holder: CoinModelViewHolder, position: Int) {
-    holder.description.text = coins[position].name
+    holder.name.text = coins[position].name
+    holder.symbol.text = holder.symbol.context.getString(R.string.trades_viewholder_symbol_format, coins[position]
+        .symbol)
+    holder.currentPrice.text = coins[position].priceUSD
+    holder.variation.text = coins[position].percentChange24h
+
   }
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CoinModelViewHolder {
@@ -41,7 +46,11 @@ class CoinsPricesAdapter(private val coins: List<Coin>) : RecyclerView.Adapter<C
       itemView.clicks().map { coins[layoutPosition] }.subscribe(clickCoinEvent)
     }
 
-    val description = itemView.findViewById(R.id.name) as TextView
+    val name = itemView.findViewById(R.id.name) as TextView
+    val symbol = itemView.findViewById(R.id.symbol) as TextView
+    val currentPrice = itemView.findViewById(R.id.currentPrice) as TextView
+    val variation = itemView.findViewById(R.id.variation) as TextView
+
 
   }
 

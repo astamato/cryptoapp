@@ -13,15 +13,17 @@ import android.widget.ProgressBar
 import creativehothouse.cryptocurrencyapp.R
 import creativehothouse.cryptocurrencyapp.R.layout
 import creativehothouse.cryptocurrencyapp.app.model.Coin
+import creativehothouse.cryptocurrencyapp.app.model.Trade
+import creativehothouse.cryptocurrencyapp.portfolio.core.view.adapter.TradePortfolioAdapter
 import creativehothouse.cryptocurrencyapp.prices.core.view.adapter.CoinsPricesAdapter
 
 class DefaultPortfolioView(context: Context) : CoordinatorLayout(context), PortfolioView {
-  private lateinit var adapter: CoinsPricesAdapter
+  private lateinit var adapter: TradePortfolioAdapter
 
   private var progressBar: ProgressBar
 
   init {
-    LinearLayout.inflate(context, layout.fragment_portfolio, this)
+    inflate(context, layout.fragment_portfolio, this)
     progressBar = findViewById(R.id.progressBar)
   }
 
@@ -33,11 +35,11 @@ class DefaultPortfolioView(context: Context) : CoordinatorLayout(context), Portf
     progressBar.visibility = View.VISIBLE
   }
 
-  override fun drawPortfolio(coins: List<Coin>) {
+  override fun drawPortfolio(trade: List<Trade>) {
     val recyclerView = findViewById<RecyclerView>(R.id.recyclerViewPortfolio)
     recyclerView.layoutManager = LinearLayoutManager(context)
     recyclerView.itemAnimator = DefaultItemAnimator()
-    adapter = CoinsPricesAdapter(coins)
+    adapter = TradePortfolioAdapter(trade)
     recyclerView.adapter = adapter
   }
 

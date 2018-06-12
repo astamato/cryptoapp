@@ -8,4 +8,6 @@
   <string name="title_notifications">Notifications</string>
 
   <string name="onErrorLoad">Error loading data</string>
+
+  <string name="trades_viewholder_symbol_format">(%1$s)</string>
 </resources>
