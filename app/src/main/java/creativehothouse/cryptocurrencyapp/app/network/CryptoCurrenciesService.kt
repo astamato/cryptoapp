@@ -1,9 +1,9 @@
 package creativehothouse.cryptocurrencyapp.app.network
 
-import creativehothouse.cryptocurrencyapp.app.model.Coin
 import creativehothouse.cryptocurrencyapp.app.model.CoinResponse
 import creativehothouse.cryptocurrencyapp.app.model.PricesListResponseModel
 import creativehothouse.cryptocurrencyapp.app.model.Trade
+import creativehothouse.cryptocurrencyapp.app.model.TradeResponse
 import creativehothouse.cryptocurrencyapp.detail.model.HistoricalReponseModel
 import creativehothouse.cryptocurrencyapp.portfolio.model.PortfolioResponseModel
 import io.reactivex.Observable
@@ -32,6 +32,6 @@ interface CryptoCurrenciesService {
   fun getPortfolio(@Header("Authorization") authHeader: String): Observable<PortfolioResponseModel>
 
   @POST("/portfolio")
-  fun storeNewTradeInPortfolio(@Header("Authorization") authHeader: String, @Body trade: Trade): Observable<Trade>
+  fun storeNewTradeInPortfolio(@Header("Authorization") authHeader: String, @Body trade: Trade): Observable<TradeResponse>
 
 }

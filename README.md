@@ -30,3 +30,4 @@ Still TODO:
 Observations
 * Coin object price_usd different type than portfolio trade price_usd
 * Pagination of list of coins
+* Store a new trade in the authed user portfolio all -> amount in body is float but response is string?

@@ -9,8 +9,6 @@ import creativehothouse.cryptocurrencyapp.detail.core.view.CoinDetailsView
 import creativehothouse.cryptocurrencyapp.detail.core.view.DefaultCoinDetailsView
 import creativehothouse.cryptocurrencyapp.detail.interactor.CoinDetailsInteractor
 import creativehothouse.cryptocurrencyapp.detail.interactor.DefaultCoinDetailsInteractor
-import creativehothouse.cryptocurrencyapp.detail.wireframe.CoinDetailsWireframe
-import creativehothouse.cryptocurrencyapp.detail.wireframe.DefaultCoinDetailsWireframe
 import dagger.Module
 import dagger.Provides
 
@@ -19,21 +17,15 @@ class CoinDetailsModule(val context: Activity) {
 
   @Provides
   @ApplicationScope
-  fun provideCoinDetailsPresenter(view: CoinDetailsView, interactor: CoinDetailsInteractor, wireframe: CoinDetailsWireframe
+  fun provideCoinDetailsPresenter(view: CoinDetailsView, interactor: CoinDetailsInteractor
   ): CoinDetailsPresenter {
-    return DefaultCoinDetailsPresenter(view, interactor, wireframe)
+    return DefaultCoinDetailsPresenter(view, interactor)
   }
 
   @Provides
   @ApplicationScope
   fun provideCoinDetailsView(): CoinDetailsView {
     return DefaultCoinDetailsView(context)
-  }
-
-  @Provides
-  @ApplicationScope
-  fun provideCoinDetailsWireframe(): CoinDetailsWireframe {
-    return DefaultCoinDetailsWireframe(context)
   }
 
   @Provides

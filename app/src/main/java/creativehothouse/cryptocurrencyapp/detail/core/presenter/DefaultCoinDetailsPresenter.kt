@@ -6,7 +6,6 @@ import creativehothouse.cryptocurrencyapp.app.model.Trade
 import creativehothouse.cryptocurrencyapp.detail.core.view.CoinDetailsView
 import creativehothouse.cryptocurrencyapp.detail.interactor.CoinDetailsInteractor
 import creativehothouse.cryptocurrencyapp.detail.model.Historical
-import creativehothouse.cryptocurrencyapp.detail.wireframe.CoinDetailsWireframe
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
@@ -15,7 +14,7 @@ import java.util.Date
 
 
 class DefaultCoinDetailsPresenter(val view: CoinDetailsView,
-    val interactor: CoinDetailsInteractor, val wireframe: CoinDetailsWireframe) : CoinDetailsPresenter {
+    val interactor: CoinDetailsInteractor) : CoinDetailsPresenter {
 
   private var coinId: Int = 0
   private var disposables = CompositeDisposable()
@@ -67,7 +66,7 @@ class DefaultCoinDetailsPresenter(val view: CoinDetailsView,
         .doOnSubscribe { view.showLoading() }
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(
-            { result -> onAddToPortfolioSuccess(result) },
+            { result -> onAddToPortfolioSuccess(result.trade) },
             { throwable -> onLoadFailed(throwable) }
         )
   }
@@ -80,6 +79,7 @@ class DefaultCoinDetailsPresenter(val view: CoinDetailsView,
 
   override fun onAddToPortfolioSuccess(result: Trade) {
     //FIXME store realm data!!!
+    view.hideLoading()
     view.displaySuccessAddToPortfolioDialog(coinDetails, result)
   }
 

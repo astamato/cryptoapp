@@ -1,23 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     >
-  <android.support.v7.widget.Toolbar
-      android:id="@+id/appToolbar"
+
+  <android.support.design.widget.AppBarLayout
       android:layout_width="match_parent"
-      android:layout_height="?attr/actionBarSize"
-      android:background="?attr/colorPrimary"
-      android:elevation="4dp"
-      app:navigationIcon="?attr/homeAsUpIndicator"
-      app:theme="@style/ToolBarStyle"
-      />
+      android:layout_height="wrap_content"
+      android:theme="@style/AppTheme.AppBarOverlay"
+      >
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/appToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:navigationIcon="?attr/homeAsUpIndicator"
+        app:popupTheme="@style/AppTheme.PopupOverlay"
+        />
+
+  </android.support.design.widget.AppBarLayout>
+
   <ScrollView
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:fillViewport="true"
+      app:layout_behavior="@string/appbar_scrolling_view_behavior"
       >
     <LinearLayout
         android:layout_width="match_parent"
@@ -37,36 +47,38 @@
       <include layout="@layout/full_coin_item"/>
 
       <com.jjoe64.graphview.GraphView
+          android:id="@+id/graph"
           android:layout_width="match_parent"
           android:layout_height="200dip"
-          android:id="@+id/graph" />
+          />
 
+      <View
+          android:layout_width="match_parent"
+          android:layout_height="20dp"
+          />
 
       <com.github.mikephil.charting.charts.LineChart
           android:id="@+id/chart"
-          android:layout_width="200dp"
+          android:layout_width="match_parent"
           android:layout_height="200dp"
           android:layout_gravity="center"
           android:layout_margin="@dimen/spacing_normal"
           />
-
+      <View
+          android:layout_width="match_parent"
+          android:layout_height="50dp"
+          />
     </LinearLayout>
   </ScrollView>
-  <FrameLayout
-      android:id="@+id/container"
-      android:layout_width="match_parent"
-      android:layout_height="0dp"
-      android:layout_weight="1"
-      />
-  <Button
+
+  <android.support.design.widget.FloatingActionButton
       android:id="@+id/addToPortfolio"
-      android:layout_width="match_parent"
+      android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_gravity="bottom"
-      android:background="@android:color/transparent"
-      android:enabled="false"
-      android:text="@string/add_to_portfolio"
-      android:textAllCaps="true"
-      android:textColor="@color/colorAccent"
+      android:layout_gravity="bottom|end"
+      android:layout_margin="@dimen/fab_margin"
+      app:fabSize="normal"
+      app:srcCompat="@android:drawable/ic_media_play"
       />
-</LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>

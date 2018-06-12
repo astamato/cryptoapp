@@ -8,14 +8,11 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import android.widget.ProgressBar
 import creativehothouse.cryptocurrencyapp.R
 import creativehothouse.cryptocurrencyapp.R.layout
-import creativehothouse.cryptocurrencyapp.app.model.Coin
 import creativehothouse.cryptocurrencyapp.app.model.Trade
 import creativehothouse.cryptocurrencyapp.portfolio.core.view.adapter.TradePortfolioAdapter
-import creativehothouse.cryptocurrencyapp.prices.core.view.adapter.CoinsPricesAdapter
 
 class DefaultPortfolioView(context: Context) : CoordinatorLayout(context), PortfolioView {
   private lateinit var adapter: TradePortfolioAdapter
