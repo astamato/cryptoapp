@@ -12,11 +12,18 @@ import creativehothouse.cryptocurrencyapp.prices.core.view.adapter.CoinsPricesAd
 import io.reactivex.subjects.PublishSubject
 
 
-class CoinsPricesAdapter(private val coins: List<Coin>) : RecyclerView.Adapter<CoinModelViewHolder>() {
+class CoinsPricesAdapter(private val coins: ArrayList<Coin>) : RecyclerView.Adapter<CoinModelViewHolder>() {
   val clickCoinEvent = PublishSubject.create<Coin>()!!
 
   override fun getItemCount(): Int {
     return coins.size
+  }
+
+
+  fun addToCoins(moreCoins: List<Coin>) {
+    val previousSize = coins.size
+    coins.addAll(moreCoins)
+    notifyItemRangeInserted(previousSize, moreCoins.size)
   }
 
   override fun onBindViewHolder(holder: CoinModelViewHolder, position: Int) {
@@ -49,7 +56,6 @@ class CoinsPricesAdapter(private val coins: List<Coin>) : RecyclerView.Adapter<C
     val symbol = itemView.findViewById(R.id.symbol) as TextView
     val currentPrice = itemView.findViewById(R.id.currentPrice) as TextView
     val variation = itemView.findViewById(R.id.variation) as TextView
-
 
   }
 

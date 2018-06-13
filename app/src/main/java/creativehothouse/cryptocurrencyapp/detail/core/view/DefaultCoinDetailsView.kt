@@ -33,7 +33,6 @@ import java.util.Date
 class DefaultCoinDetailsView(context: Context?) : CoinDetailsView, CoordinatorLayout(context) {
 
   private var progressBar: ProgressBar
-  private var chart: LineChart
   private var toolbar: Toolbar
   private var addToPortfolioButton: FloatingActionButton
 
@@ -42,7 +41,6 @@ class DefaultCoinDetailsView(context: Context?) : CoinDetailsView, CoordinatorLa
     toolbar = findViewById(R.id.appToolbar)
     toolbar.title = context?.getString(R.string.coin_details_screen)
     progressBar = findViewById(R.id.progressBar)
-    chart = findViewById(R.id.chart)
     addToPortfolioButton = findViewById(R.id.addToPortfolio)
 
   }
@@ -73,8 +71,7 @@ class DefaultCoinDetailsView(context: Context?) : CoinDetailsView, CoordinatorLa
 
     drawChartStrategy1(historical)
 
-    drawChartStrategy2(historical, coin)
-
+    // drawChartStrategy2(historical, coin)
   }
 
   /**
@@ -89,6 +86,7 @@ class DefaultCoinDetailsView(context: Context?) : CoinDetailsView, CoordinatorLa
   private fun drawChartStrategy1(historical: List<Historical>) {
     val sdf = SimpleDateFormat("yyyy-MM-dd")
     val graph = findViewById<View>(R.id.graph) as GraphView
+    graph.visibility = View.VISIBLE
     val list = ArrayList<DataPoint>()
     for (hist in historical) {
       list.add(DataPoint(hist.snapshot, hist.priceUSD.toDouble()))
@@ -113,6 +111,8 @@ class DefaultCoinDetailsView(context: Context?) : CoinDetailsView, CoordinatorLa
 
   private fun drawChartStrategy2(historical: List<Historical>,
       coin: Coin) {
+    var chart = findViewById<LineChart>(R.id.chart)
+    chart.visibility = View.VISIBLE
     val entries = ArrayList<Entry>()
     val referenceTimestamp = historical[0].snapshot.time
 

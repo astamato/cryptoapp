@@ -12,5 +12,6 @@ interface PricesPresenter {
   fun onGetCryptoCurrenciesListSuccess(coins: PricesListResponseModel)
   fun onGetCryptoCurrenciesListFail(it: Throwable?)
   fun onCryptoCurrencyIsSelected(): Disposable
+  fun onGetCryptoCurrenciesAddToListSuccess(result: PricesListResponseModel)
 
 }

@@ -17,9 +17,6 @@ Some classes are similar which is intentional. Each screen is treated as a separ
 fulfill all its dependencies and does not rely on a core module with shared code.
 Injection of dependencies is driven by Dagger 2.
 
-2 libraries were introduced to resolve the historical graph in the coin details view. In a real world scenario I'd present 
-options to the designers to see wha t 
-
 Still TODO:
 
 * Prices view list, infinite scrolling
@@ -32,5 +29,6 @@ Still TODO:
 Observations
 * Coin object price_usd different type than portfolio trade price_usd
 * Store a new trade in the authed user portfolio all -> amount in body is float but response is string?
+* Store a new trade in the authed user portfolio put call does not store the data
 * Pagination of list of coins
 * Realm does not support Kotlin's data classes

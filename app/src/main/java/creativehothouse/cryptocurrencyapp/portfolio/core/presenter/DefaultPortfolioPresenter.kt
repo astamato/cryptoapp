@@ -34,6 +34,9 @@ class DefaultPortfolioPresenter(val view: PortfolioView,
     view.hideLoading()
 
     //FIXME REALM LOAD FROM DATABASE!!!
+    //if online cargar desde db
+    // display banner with last valid information
+    //interactor.getCoinsInDB(realm)
 
     view.showErrorLoadingCoinList()
   }

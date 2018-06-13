@@ -13,17 +13,23 @@ import creativehothouse.cryptocurrencyapp.app.model.Coin
 import creativehothouse.cryptocurrencyapp.app.model.PricesListResponseModel
 import creativehothouse.cryptocurrencyapp.prices.core.view.adapter.CoinsPricesAdapter
 import io.reactivex.Observable
+import io.reactivex.subjects.PublishSubject
 
 
 class DefaultPricesView(context: Context) : LinearLayout(context), PricesView {
 
-  private lateinit var adapter: CoinsPricesAdapter
+  val clickOnLoadMore = PublishSubject.create<Boolean>()!!
 
+  private lateinit var adapter: CoinsPricesAdapter
+  private var layoutManager: LinearLayoutManager
   private var progressBar: ProgressBar
+  private val visibleThreshold = 5
+  private var loading: Boolean = false
 
   init {
     inflate(context, R.layout.fragment_prices_list, this)
     progressBar = findViewById(R.id.progressBar)
+    layoutManager = LinearLayoutManager(context)
   }
 
   override fun getView(): View {
@@ -38,15 +44,39 @@ class DefaultPricesView(context: Context) : LinearLayout(context), PricesView {
     progressBar.visibility = View.VISIBLE
   }
 
+
+  override fun addToCoins(responseModel: PricesListResponseModel) {
+    adapter.addToCoins(responseModel.coins.data)
+  }
+
   override fun drawCoinsList(responseModel: PricesListResponseModel) {
     val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
-    recyclerView.layoutManager = LinearLayoutManager(context)
+    recyclerView.layoutManager = layoutManager
+    recyclerView
+        .addOnScrollListener(object : RecyclerView.OnScrollListener() {
+          override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
+            var totalItemCount = layoutManager.itemCount
+            var lastVisibleItem = layoutManager
+                .findLastVisibleItemPosition()
+            if (!loading
+                && totalItemCount <= (lastVisibleItem + visibleThreshold)) {
+              clickOnLoadMore.onNext(true)
+              loading = true
+            }
+          }
+        })
     adapter = CoinsPricesAdapter(responseModel.coins.data)
+
+
     recyclerView.adapter = adapter
   }
 
   override fun onCoinIsSelected(): Observable<Coin> {
     return adapter.clickCoinEvent
+  }
+
+  override fun onLoadMore(): Observable<Boolean> {
+    return clickOnLoadMore
   }
 
   override fun showErrorLoadingCoinList() {

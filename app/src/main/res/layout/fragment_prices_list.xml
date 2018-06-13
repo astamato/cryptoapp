@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/placeSnackBar"
     android:layout_width="match_parent"
+
     android:layout_height="match_parent"
     >
   <android.support.constraint.ConstraintLayout
@@ -31,5 +33,16 @@
         android:paddingBottom="@dimen/spacing_normal"
         android:paddingTop="@dimen/spacing_normal"
         />
+
+    <TextView
+        android:id="@+id/empty_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="No Records"
+        android:visibility="gone"
+        tools:visibility="visible"
+        />
+
   </android.support.constraint.ConstraintLayout>
 </android.support.design.widget.CoordinatorLayout>

@@ -15,6 +15,7 @@ class DefaultPricesPresenter(val view: PricesView,
     val interactor: PricesInteractor,
     val wireframe: PricesWireframe) : PricesPresenter {
 
+
   private var disposables = CompositeDisposable()
 
   override fun create() {
@@ -42,14 +43,41 @@ class DefaultPricesPresenter(val view: PricesView,
         )
   }
 
+  override fun onGetCryptoCurrenciesAddToListSuccess(responseModel: PricesListResponseModel) {
+    interactor.storeOrUpdatePagesModel(responseModel)
+    view.addToCoins(responseModel)
+  }
+
+  private fun observeOnLoadMore(): Disposable {
+    return view.onLoadMore()
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(
+            { _ ->
+              if (interactor.hasNextPage()) {
+                interactor.getCryptoCurrenciesListByPage(interactor.getNextPage())
+                    .subscribeOn(Schedulers.io())
+                    .doOnSubscribe { view.showLoading() }
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(
+                        { result -> onGetCryptoCurrenciesAddToListSuccess(result) },
+                        { throwable -> onGetCryptoCurrenciesListFail(throwable) }
+                    )
+              }
+            },
+            { throwable -> onGetCryptoCurrenciesListFail(throwable) }
+        )
+  }
 
   override fun getView(): View = view.getView()
 
 
   override fun onGetCryptoCurrenciesListSuccess(responseModel: PricesListResponseModel) {
     view.hideLoading()
+    interactor.storeOrUpdatePagesModel(responseModel)
     view.drawCoinsList(responseModel)
     disposables.add(observeTicketIsSelected())
+    disposables.add(observeOnLoadMore())
   }
 
   override fun onGetCryptoCurrenciesListFail(it: Throwable?) {
