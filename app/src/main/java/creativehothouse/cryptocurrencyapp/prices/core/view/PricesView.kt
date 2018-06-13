@@ -17,4 +17,5 @@ interface PricesView {
   fun showErrorLoadingCoinList()
   fun onLoadMore(): Observable<Boolean>
   fun addToCoins(responseModel: PricesListResponseModel)
+  fun setLoaded()
 }

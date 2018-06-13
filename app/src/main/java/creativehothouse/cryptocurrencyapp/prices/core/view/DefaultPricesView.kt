@@ -44,6 +44,9 @@ class DefaultPricesView(context: Context) : LinearLayout(context), PricesView {
     progressBar.visibility = View.VISIBLE
   }
 
+  override fun setLoaded() {
+    loading = false
+  }
 
   override fun addToCoins(responseModel: PricesListResponseModel) {
     adapter.addToCoins(responseModel.coins.data)

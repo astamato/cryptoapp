@@ -43,11 +43,6 @@ class DefaultPricesPresenter(val view: PricesView,
         )
   }
 
-  override fun onGetCryptoCurrenciesAddToListSuccess(responseModel: PricesListResponseModel) {
-    interactor.storeOrUpdatePagesModel(responseModel)
-    view.addToCoins(responseModel)
-  }
-
   private fun observeOnLoadMore(): Disposable {
     return view.onLoadMore()
         .subscribeOn(Schedulers.io())
@@ -80,12 +75,19 @@ class DefaultPricesPresenter(val view: PricesView,
     disposables.add(observeOnLoadMore())
   }
 
+  override fun onGetCryptoCurrenciesAddToListSuccess(responseModel: PricesListResponseModel) {
+    view.hideLoading()
+    view.setLoaded()
+    interactor.storeOrUpdatePagesModel(responseModel)
+    view.addToCoins(responseModel)
+  }
+
   override fun onGetCryptoCurrenciesListFail(it: Throwable?) {
     view.hideLoading()
+    view.setLoaded()
     view.showErrorLoadingCoinList()
     Log.e("DefaultPricesPresenter", "Error when trying to retrieve the cryptocurrencies", it)
   }
-
 
   override fun onCryptoCurrencyIsSelected(): Disposable {
     return view.onCoinIsSelected()
