@@ -24,7 +24,6 @@
   </android.support.design.widget.AppBarLayout>
 
   <ScrollView
-      android:id="@+id/scrollView"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:fillViewport="true"
@@ -46,36 +45,43 @@
           style="?android:attr/progressBarStyleHorizontal"
           />
 
-      <include layout="@layout/full_coin_item"/>
+      <LinearLayout
+          android:id="@+id/view_container"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="vertical"
+          >
+        <include layout="@layout/full_coin_item"/>
 
-      <com.jjoe64.graphview.GraphView
-          android:id="@+id/graph"
-          android:layout_width="match_parent"
-          android:layout_height="200dip"
-          android:layout_marginEnd="@dimen/spacing_normal"
-          android:layout_marginStart="@dimen/spacing_normal"
-          android:visibility="gone"
-          />
+        <com.jjoe64.graphview.GraphView
+            android:id="@+id/graph"
+            android:layout_width="match_parent"
+            android:layout_height="200dip"
+            android:layout_marginEnd="@dimen/spacing_normal"
+            android:layout_marginStart="@dimen/spacing_normal"
+            android:visibility="gone"
+            />
 
-      <View
-          android:layout_width="match_parent"
-          android:layout_height="20dp"
-          />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            />
 
-      <com.github.mikephil.charting.charts.LineChart
-          android:id="@+id/chart"
-          android:layout_width="match_parent"
-          android:layout_height="200dp"
-          android:layout_gravity="center"
-          android:layout_margin="@dimen/spacing_normal"
-          android:layout_marginEnd="@dimen/spacing_normal"
-          android:layout_marginStart="@dimen/spacing_normal"
-          android:visibility="gone"
-          />
-      <View
-          android:layout_width="match_parent"
-          android:layout_height="50dp"
-          />
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/chart"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/spacing_normal"
+            android:layout_marginEnd="@dimen/spacing_normal"
+            android:layout_marginStart="@dimen/spacing_normal"
+            android:visibility="gone"
+            />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            />
+      </LinearLayout>
     </LinearLayout>
   </ScrollView>
 

@@ -78,7 +78,7 @@ class DefaultCoinDetailsView(context: Context?) : CoinDetailsView, CoordinatorLa
    * Will make the view visible once the loading of the data is completed
    */
   private fun activateView() {
-    var scrollView = findViewById<View>(R.id.scrollView)
+    var scrollView = findViewById<View>(R.id.view_container)
     scrollView.visibility = View.VISIBLE
   }
 
