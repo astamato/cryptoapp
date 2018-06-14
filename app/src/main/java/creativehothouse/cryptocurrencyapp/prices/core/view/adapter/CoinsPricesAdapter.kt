@@ -32,6 +32,10 @@ class CoinsPricesAdapter(private val coins: ArrayList<Coin>) : RecyclerView.Adap
         .symbol)
     holder.currentPrice.text = coins[position].priceUSD
     holder.variation.text = coins[position].percentChange24h
+    holder.rank.text =
+        holder.symbol.context.getString(R.string.rank_format, coins[position]
+            .rank.toString())
+    coins[position].rank.toString()
 
   }
 
@@ -56,6 +60,7 @@ class CoinsPricesAdapter(private val coins: ArrayList<Coin>) : RecyclerView.Adap
     val symbol = itemView.findViewById(R.id.symbol) as TextView
     val currentPrice = itemView.findViewById(R.id.currentPrice) as TextView
     val variation = itemView.findViewById(R.id.variation) as TextView
+    val rank = itemView.findViewById(R.id.rank) as TextView
 
   }
 

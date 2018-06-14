@@ -143,6 +143,8 @@ class DefaultCoinDetailsView(context: Context?) : CoinDetailsView, CoordinatorLa
     currentPrice.text = coin.priceUSD
     val variation = findViewById<TextView>(R.id.variation)
     variation.text = coin.percentChange24h
+    val rank = findViewById<TextView>(R.id.rank)
+    rank.visibility = View.GONE
 
     toolbar.title = coin.name
   }

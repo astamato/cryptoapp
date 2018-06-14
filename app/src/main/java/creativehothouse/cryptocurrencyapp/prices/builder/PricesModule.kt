@@ -36,7 +36,6 @@ class PricesModule(private val context: Context) {
     return DefaultPricesInteractor(service)
   }
 
-
   @Provides
   @ApplicationScope
   fun providePricesWireframe(): PricesWireframe {

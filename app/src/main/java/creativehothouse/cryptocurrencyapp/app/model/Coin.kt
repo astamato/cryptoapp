@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName
 data class Coin(val id: Int,
     val name: String,
     val symbol: String,
+    @SerializedName("rank") val rank: Int,
     @SerializedName("price_usd") val priceUSD: String,
     @SerializedName("market_cap_usd") val marketCapUSD: Long,
     @SerializedName("available_supply") val availableSupply: Long,

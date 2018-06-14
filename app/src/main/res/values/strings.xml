@@ -1,18 +1,16 @@
 <resources>
   <string name="app_name">CryptoApp</string>
+  <string name="coin_details_screen">Coin Details</string>
+
   <string name="item_list">Prices</string>
   <string name="item_portfolio">Portfolio</string>
-  <string name="title_activity_main2">Main2Activity</string>
-  <string name="title_home">Home</string>
-  <string name="title_dashboard">Dashboard</string>
-  <string name="title_notifications">Notifications</string>
 
   <string name="onErrorLoad">Error loading data</string>
 
   <string name="trades_viewholder_symbol_format">(%1$s)</string>
+  <string name="rank_format">#%1$s</string>
 
   <string name="price_label">Price:</string>
-  <string name="coin_details_screen">Coin Details</string>
 
   <string name="market_cap_usd">Market Cap USD:</string>
   <string name="available_supply">Available Supply:</string>
@@ -24,6 +22,7 @@
   <string name="add_to_portfolio_dialog_message">Your trade has been recorded successfully for coin: %1$s (%2$s). The
     amount is %3$s </string>
   <string name="add_to_portfolio_dialog_title">New Trade!</string>
+  <string name="amount_label">Amount:</string>
 
 
 </resources>

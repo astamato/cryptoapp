@@ -10,5 +10,5 @@ import io.realm.rx.CollectionChange
 interface PortfolioInteractor {
   fun getAuthedPortfolio(): Observable<PortfolioResponseModel>
   fun storeCoinsInDB(realm: Realm, coins: List<Trade>)
-  fun getCoinsInDB(realm: Realm): Observable<CollectionChange<RealmResults<Trade>>>
+  fun getCoinsInDB(realm: Realm): List<Trade>
 }
