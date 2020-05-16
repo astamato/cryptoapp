@@ -9,47 +9,47 @@ import creativehothouse.cryptocurrencyapp.portfolio.PortfolioFragment
 import creativehothouse.cryptocurrencyapp.prices.PricesFragment
 
 class LandingActivity : AppCompatActivity() {
-  private val pricesFragment: Fragment
-  private val portfolioFragment: Fragment
-  lateinit var toolbar: Toolbar
+    private val pricesFragment: Fragment
+    private val portfolioFragment: Fragment
+    lateinit var toolbar: Toolbar
 
-  init {
-    pricesFragment = PricesFragment.newInstance()
-    portfolioFragment = PortfolioFragment.newInstance()
-  }
-
-  private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
-    when (item.itemId) {
-      R.id.navigation_list -> {
-        toolbar.title = getString(R.string.item_list)
-        openFragment(pricesFragment)
-        return@OnNavigationItemSelectedListener true
-      }
-      R.id.navigation_portfolio -> {
-        toolbar.title = getString(R.string.item_portfolio)
-        openFragment(portfolioFragment)
-        return@OnNavigationItemSelectedListener true
-      }
+    init {
+        pricesFragment = PricesFragment.newInstance()
+        portfolioFragment = PortfolioFragment.newInstance()
     }
-    false
-  }
 
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    setContentView(R.layout.activity_main)
+    private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
+        when (item.itemId) {
+            R.id.navigation_list -> {
+                toolbar.title = getString(R.string.item_list)
+                openFragment(pricesFragment)
+                return@OnNavigationItemSelectedListener true
+            }
+            R.id.navigation_portfolio -> {
+                toolbar.title = getString(R.string.item_portfolio)
+                openFragment(portfolioFragment)
+                return@OnNavigationItemSelectedListener true
+            }
+        }
+        false
+    }
 
-    setSupportActionBar(findViewById(R.id.appToolbar))
-    toolbar = findViewById(R.id.appToolbar)
-    val bottomNavigation: BottomNavigationView = findViewById(R.id.navigationView)
-    bottomNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
 
-    openFragment(pricesFragment)
-  }
+        setSupportActionBar(findViewById(R.id.appToolbar))
+        toolbar = findViewById(R.id.appToolbar)
+        val bottomNavigation: BottomNavigationView = findViewById(R.id.navigationView)
+        bottomNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
-  private fun openFragment(fragment: Fragment) {
-    val transaction = supportFragmentManager.beginTransaction()
-    transaction.replace(R.id.container, fragment)
-    transaction.addToBackStack(null)
-    transaction.commit()
-  }
+        openFragment(pricesFragment)
+    }
+
+    private fun openFragment(fragment: Fragment) {
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.container, fragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
+    }
 }

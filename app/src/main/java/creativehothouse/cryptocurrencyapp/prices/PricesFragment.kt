@@ -13,24 +13,24 @@ import javax.inject.Inject
 
 class PricesFragment : Fragment() {
 
-  @Inject
-  lateinit var presenter: PricesPresenter
+    @Inject
+    lateinit var presenter: PricesPresenter
 
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
-    DaggerPricesComponent.builder().pricesModule(PricesModule(context!!))
-        .networkModule(NetworkModule(context!!)).build()
-        .inject(this)
+        DaggerPricesComponent.builder().pricesModule(PricesModule(requireContext()))
+                .networkModule(NetworkModule(requireContext())).build()
+                .inject(this)
 
-    presenter.create()
-  }
+        presenter.create()
+    }
 
-  override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-    return presenter.getView()
-  }
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return presenter.getView()
+    }
 
-  companion object {
-    fun newInstance(): PricesFragment = PricesFragment()
-  }
+    companion object {
+        fun newInstance(): PricesFragment = PricesFragment()
+    }
 }

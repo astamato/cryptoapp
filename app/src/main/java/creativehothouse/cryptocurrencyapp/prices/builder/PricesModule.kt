@@ -6,9 +6,9 @@ import creativehothouse.cryptocurrencyapp.app.network.CryptoCurrenciesService
 import creativehothouse.cryptocurrencyapp.prices.core.interactor.DefaultPricesInteractor
 import creativehothouse.cryptocurrencyapp.prices.core.interactor.PricesInteractor
 import creativehothouse.cryptocurrencyapp.prices.core.presenter.DefaultPricesPresenter
-import creativehothouse.cryptocurrencyapp.prices.core.presenter.DefaultPricesWireframe
+import creativehothouse.cryptocurrencyapp.prices.wireframe.DefaultPricesWireframe
 import creativehothouse.cryptocurrencyapp.prices.core.presenter.PricesPresenter
-import creativehothouse.cryptocurrencyapp.prices.core.presenter.PricesWireframe
+import creativehothouse.cryptocurrencyapp.prices.wireframe.PricesWireframe
 import creativehothouse.cryptocurrencyapp.prices.core.view.DefaultPricesView
 import creativehothouse.cryptocurrencyapp.prices.core.view.PricesView
 import dagger.Module

@@ -1,4 +1,4 @@
-package creativehothouse.cryptocurrencyapp.prices.core.presenter
+package creativehothouse.cryptocurrencyapp.prices.wireframe
 
 import creativehothouse.cryptocurrencyapp.app.model.Coin
 
